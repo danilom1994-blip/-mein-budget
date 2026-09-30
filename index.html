@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Einfache Budget-App">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+  <title>Mein Budget</title>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">MEIN BUDGET</div>
+        <h1 id="monthTitle">September 2026</h1>
+      </div>
+      <button id="clearBtn" class="icon-btn" aria-label="Alle Daten löschen" title="Alle Daten löschen">⚙</button>
+    </header>
+
+    <section class="balance-card">
+      <div class="label">Verfügbar</div>
+      <div id="balance" class="balance">CHF 0.00</div>
+      <div class="balance-row">
+        <div><span>Einnahmen</span><strong id="income">CHF 0.00</strong></div>
+        <div><span>Ausgaben</span><strong id="expense">CHF 0.00</strong></div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button class="action income-action" data-type="income"><span>＋</span> Einnahme</button>
+      <button class="action expense-action" data-type="expense"><span>−</span> Ausgabe</button>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Ausgaben nach Kategorie</h2>
+      </div>
+      <div id="categories" class="categories"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Transaktionen</h2>
+        <select id="monthFilter" aria-label="Monat auswählen"></select>
+      </div>
+      <div id="transactions" class="transactions"></div>
+    </section>
+  </main>
+
+  <dialog id="entryDialog">
+    <form method="dialog" id="entryForm">
+      <div class="dialog-head">
+        <h2 id="dialogTitle">Ausgabe hinzufügen</h2>
+        <button type="button" class="close" id="closeDialog">×</button>
+      </div>
+      <input type="hidden" id="entryType" value="expense">
+
+      <label>Betrag (CHF)
+        <input id="amount" inputmode="decimal" type="number" min="0.01" step="0.01" placeholder="0.00" required>
+      </label>
+
+      <label>Kategorie
+        <select id="category" required>
+          <option value="Wohnen">🏠 Wohnen</option>
+          <option value="Lebensmittel">🛒 Lebensmittel</option>
+          <option value="Transport">🚗 Transport</option>
+          <option value="Freizeit">🎉 Freizeit</option>
+          <option value="Abos">💳 Abos</option>
+          <option value="Shopping">🛍️ Shopping</option>
+          <option value="Gesundheit">💚 Gesundheit</option>
+          <option value="Sonstiges">📦 Sonstiges</option>
+        </select>
+      </label>
+
+      <label>Datum
+        <input id="date" type="date" required>
+      </label>
+
+      <label>Notiz
+        <input id="note" type="text" maxlength="80" placeholder="z. B. Migros">
+      </label>
+
+      <button class="submit-btn" value="default">Speichern</button>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js");</script>
+</body>
+</html>
